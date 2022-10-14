@@ -19,7 +19,7 @@ Dari uraian latar belakang yang telah dijabarkan diatas, dapat dirumuskan masala
 ### Goals
 
 Tujuan:
-- Memberikan rekomendasi yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit..
+- Memberikan rekomendasi yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
 - Metode yang digunakan adalah konten user based filtering yang gmenggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit. 
 
 ### Solution statements
@@ -71,7 +71,7 @@ Pada tahap ini saya memiliki nilai 37700 yang hilang, namun dengan mengdrop data
 Content based filtering menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit..
 Pada tahap ini saya membuat variabel baru untuk mengerucutkan apa saja yang saya akan tampilkan, seperti 'cuisines', 'Nilai Rating', dan 'cost'. Dari situ kita bisa menggunakan kata kunci nama restoan yang berasal untuk mencari rekomendasi restoran 40 teratas yang memiliki nilai relevan seperti rating dan biaya yang diberikan oleh pengguna. Dan disitu saya mengerucutkannya lagi yang hanya menampilkan 10 restoran teratas dengan kategori 'Nilai Rating' dan 'cost' atau biaya.
 - Kelebihannya tidak memerlukan proses pembentukan neighborhood.
-- Kelemahan dari user based filtering adalah ketika pengujian dilakukan dengan pengukuran error menggunakan normalized mean absolute error (NMAE), hasil yang diperoleh NMAE cukup tinggi
+- Kelemahan dari user based filtering adalah ketika pengujian dilakukan dengan pengukuran error menggunakan normalized mean absolute error (NMAE), hasil yang diperoleh NMAE cukup tinggi.
 
 ### Hasil Modelling
 Hasil dari rekomendasi beberapa restoran yang serupa dengan nama restoran 'Jalsa' :
@@ -94,7 +94,8 @@ Pada Tabel.1 merekomendasikan restoran yang memiliki kemiripan seperti restoran 
 
 ## Evaluation
 Saya mengambil sampel satu lagi untuk memastikan bahwa sistem rekomendasinya berjalan dengan baik yaitu Grand Village.
-Berikut hasil dari Restoran Grand Village
+
+Berikut hasil dari Restoran Grand Village:
 |index|cuisines|Nilai Rating|cost|
 |---|---|---|---|
 |Village - The Soul Of India|North Indian, Lucknowi, Gujarati, Maharashtrian, South Indian, Bengali|3\.85|1\.1|
