@@ -8,7 +8,7 @@ Pertumbuhan teknologi pesat dalam pengumpulan data telah membawa ke era baru dun
 
 Sistem rekomendasi adalah jenis sistem penyaringan informasi karena meningkatkan kualitas hasil pencarian dan menyediakan elemen yang lebih relevan dengan item pencarian atau yang terkait dengan riwayat pencarian pengguna.
 
-Ini adalah sistem penyaringan informasi aktif yang mempersonalisasi informasi yang diberikan kepada pengguna berdasarkan minat mereka, relevansi informasi, dll. Sistem rekomendasi banyak digunakan untuk merekomendasikan film, item, restoran, tempat untuk dikunjungi, item untuk dibeli, dll. Dengan menggunakan metode onten based filtering yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
+Ini adalah sistem penyaringan informasi aktif yang mempersonalisasi informasi yang diberikan kepada pengguna berdasarkan minat mereka, relevansi informasi, dll. Sistem rekomendasi banyak digunakan untuk merekomendasikan film, item, restoran, tempat untuk dikunjungi, item untuk dibeli, dll. Dengan menggunakan metode conten based filtering yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
 
 ## Business Understanding
 ### Problem Statements
@@ -23,8 +23,7 @@ Tujuan:
 - Metode yang digunakan adalah konten user based filtering yang gmenggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit. 
 
 ### Solution statements
-- Menghilangkan nilai yang hilang pada kolom 
-- Meneliti dataset seperi menghilangkan kolom yang tidak perlu kita gunakan dan kita menghapusnya. Kemudian menghilangkan item yang memiliki nama serupa.
+- Meneliti dataset seperti menghilangkan kolom yang tidak perlu kita gunakan dan kita menghapusnya. Kemudian menghilangkan item yang memiliki nama serupa.
 
 ## Data Understanding
 Dataset yang digunakan pada proyek kali ini adalah Zomato Bangalore Dataset dari [Kaggle](https://www.kaggle.com/datasets/absin7/zomato-bangalore-dataset) yang memiliki ukuran 89 mb dan memiliki 17 kolom dan 51716 baris.
@@ -64,6 +63,10 @@ Pada gambar .1 kita bisa lihat bahwa Koramangala 5th Black adalah lokasi restora
 ## Data Preparation
 ### Menghapus Kolom
 Pada tahap ini saya melakukan penghapusan pada kolom yang tidak kita gunakan seperti yang saya lakukan pada dataset yaitu 'url', 'dish_liked', 'phone', 'address','rest_type', 'type', 'menu_item' dan'votes'. Dengan mengdrop kolom yang kita rasa tidak perlu.
+### Menghitung Rata - Rata Rating
+Menghitung rata-rata rating menggunakan _mean_ dan menormalisasi data menggunakan MinMaxScaler
+### Sampel
+Pada sampel data yang kita gunakan adalah 50% dari data menggunakan frac(0.5) yang artinya menggunakan setengah dari total data.
 ### Penanganan Nilai Hilang
 Pada tahap ini saya memiliki nilai 37700 yang hilang, namun dengan mengdrop data yang hilang tersebut maka saya bisa melanjutkan modelling tanpa masalah. 
 Metode yang saya gunakan adalah dengan menghapus data yang hilang menggunakan drop, 
@@ -74,7 +77,12 @@ df.dropna(how='any',inplace=True)
 ## Modeling
 
 ### Content Based Filtering
-Content based filtering menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit..
+Content based filtering menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
+### TF-IDF
+Membuat tf-idf matrix. Disitu saya menggunakan Cosine Similarity untuk mendeteksi kata plagiarisme dari 'reviews_list'.
+
+Membuat daftar untuk menempatkan restoran teratas kemudian mencari indeks restoran yang dimasukkan. Mencari restoran dengan nilai cosinus yang sama dari nomor besar. Mengekstrak 40 indeks restoran teratas dengan nilai cosinus yang serupa. Dilanjut membuat kumpulan data baru untuk menampilkan restoran serupa dan buat 40 restoran serupa teratas dengan beberapa kolomnya. Setelah itu _drop_ restoran yang bernama sama dan urutkan hanya 10 teratas berdasarkan peringkat tertinggi
+
 Pada tahap ini saya membuat variabel baru untuk mengerucutkan apa saja yang saya akan tampilkan, seperti 'cuisines', 'Nilai Rating', dan 'cost'. Dari situ kita bisa menggunakan kata kunci nama restoan yang berasal untuk mencari rekomendasi restoran 40 teratas yang memiliki nilai relevan seperti rating dan biaya yang diberikan oleh pengguna. Dan disitu saya mengerucutkannya lagi yang hanya menampilkan 10 restoran teratas dengan kategori 'Nilai Rating' dan 'cost' atau biaya.
 - Kelebihannya tidak memerlukan proses pembentukan neighborhood.
 - Kelemahan dari user based filtering adalah ketika pengujian dilakukan dengan pengukuran error menggunakan normalized mean absolute error (NMAE), hasil yang diperoleh NMAE cukup tinggi.
