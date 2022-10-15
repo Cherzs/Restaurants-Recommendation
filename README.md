@@ -24,7 +24,7 @@ Tujuan:
 
 ### Solution statements
 - Menghilangkan nilai yang hilang pada kolom 
-- Meneliti dataset seperi mennghilangkan kolom yang tidak perlu kita gunakan dan kita menghapusnya. Kemudian menghilangkan item yang memiliki nama serupa.
+- Meneliti dataset seperi menghilangkan kolom yang tidak perlu kita gunakan dan kita menghapusnya. Kemudian menghilangkan item yang memiliki nama serupa.
 
 ## Data Understanding
 Dataset yang digunakan pada proyek kali ini adalah Zomato Bangalore Dataset dari [Kaggle](https://www.kaggle.com/datasets/absin7/zomato-bangalore-dataset) yang memiliki ukuran 89 mb dan memiliki 17 kolom dan 51716 baris.
@@ -52,7 +52,9 @@ Berikut informasi mengenai variabel dari dataset:
 Drop kolom yang tidak digunakan pada dataset ini yaitu 'url', 'dish_liked', 'phone', 'address','rest_type', 'type', 'menu_item', 'votes'. Kolom yang tersisa setelah didrop sejumlah 10 kolom dan 23043 baris. Kemudian kolom yang digunakan hanya 'cuisines',	'Nilai Rating' yang diubah dari kolom 'rates' dan 'cost'. Sedangkan baris yang digunakan hanya 23043 dari 51716.
 
 Kemudian menangani Nilai yang hilang pada dataset dengan menghapusnya menggunakan drop hingga tak tersisa. 
-- Visualisasi dari lokasi restoran terlaris 
+- Visualisasi dari lokasi restoran terlaris.
+Restoran yang memiliki rating tinggi diberi penilaian oleh pengguna yang sudah mengunjunginya.
+
 ![lok](https://user-images.githubusercontent.com/76243151/195944993-893ab362-280b-4de9-9906-ed695003dcc0.png)
 
 Gambar.1 Visualisasi lokasi 
@@ -64,6 +66,10 @@ Pada gambar .1 kita bisa lihat bahwa Koramangala 5th Black adalah lokasi restora
 Pada tahap ini saya melakukan penghapusan pada kolom yang tidak kita gunakan seperti yang saya lakukan pada dataset yaitu 'url', 'dish_liked', 'phone', 'address','rest_type', 'type', 'menu_item' dan'votes'. Dengan mengdrop kolom yang kita rasa tidak perlu.
 ### Penanganan Nilai Hilang
 Pada tahap ini saya memiliki nilai 37700 yang hilang, namun dengan mengdrop data yang hilang tersebut maka saya bisa melanjutkan modelling tanpa masalah. 
+Metode yang saya gunakan adalah dengan menghapus data yang hilang menggunakan drop, 
+
+df.isnull().sum()
+df.dropna(how='any',inplace=True)
 
 ## Modeling
 
@@ -75,6 +81,9 @@ Pada tahap ini saya membuat variabel baru untuk mengerucutkan apa saja yang saya
 
 ### Hasil Modelling
 Hasil dari rekomendasi beberapa restoran yang serupa dengan nama restoran 'Jalsa' :
+
+Pada Tabel.1 merekomendasikan restoran yang memiliki kemiripan seperti restoran Jalsa
+
 |index|cuisines|Nilai Rating|cost|
 |---|---|---|---|
 |The Black Pearl|North Indian, European, Mediterranean|4\.78|1\.4|
@@ -88,14 +97,17 @@ Hasil dari rekomendasi beberapa restoran yang serupa dengan nama restoran 'Jalsa
 |Deja Vu Resto Bar|North Indian, Italian|4\.35|900\.0|
 |The Fisherman'S Wharf|Seafood, Goan, North Indian, Continental, Asian|4\.3|1\.4|
 
-Tabel.1 Hasil Rekomendasi dari "Jalsa
+Tabel.1 Hasil Rekomendasi dari "Jalsa"
 
-Pada Tabel.1 merekomendasikan restoran yang memiliki kemiripan seperti restoran Jalsa
+
 
 ## Evaluation
 Saya mengambil sampel satu lagi untuk memastikan bahwa sistem rekomendasinya berjalan dengan baik yaitu Grand Village.
 
 Berikut hasil dari Restoran Grand Village:
+
+Pada Tabel.2 terlihat bahwa rekomendasi dari restoran yang serupa dengan Grand Villge
+
 |index|cuisines|Nilai Rating|cost|
 |---|---|---|---|
 |Village - The Soul Of India|North Indian, Lucknowi, Gujarati, Maharashtrian, South Indian, Bengali|3\.85|1\.1|
@@ -111,11 +123,16 @@ Berikut hasil dari Restoran Grand Village:
 
 Tabel.2 Hasil Rekomendasi dari "Grand Village"
 
-Pada Tabel.2 terlihat bahwa rekomendasi dari restoran yang serupa dengan Grand Villge
+
 
 Rumus untuk Content-Based Filtering : 
 
 P =(  # of our recommendations that are relevant) / (# of items we recommended)
+
+Untuk p = 1, karena rekomendasi yang relevan dibagi dengan item yang kita rekomendasikan
+yang mana untuk rekomendasi relevan = 10, item yang direkomendasi = 10.
+
+Maka, 10/10 = 1
 
 Dengan rumus diatas, kita bisa merekomendasikan dengan sangat baik.
 
