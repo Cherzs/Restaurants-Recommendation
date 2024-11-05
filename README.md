@@ -1,149 +1,144 @@
-# Laporan Proyek Machine Learning - Muhammad Zhafran Ghaly
+# Machine Learning Project Report - Muhammad Zhafran Ghaly
 
-## Kategori Proyek 
-Kategori yang saya pilih pada proyek ini adalah sistem rekomendasi Restoran di Bangalore, India pada situs Zomato
+## Project Category
+The category I chose for this project is a Restaurant recommendation system in Bangalore, India on the Zomato website.
 
-## Latar Belakang
-Pertumbuhan teknologi pesat dalam pengumpulan data telah membawa ke era baru dunia yang digerakkan oleh data. Data digunakan untuk membuat sistem yang lebih efisien dan di situlah sistem pemberi rekomendasi masuk.
+## Background
+The rapid growth of technology in data collection has led to a new era of data-driven world. Data is used to create more efficient systems and that's where recommendation systems come in.
 
-Sistem rekomendasi adalah jenis sistem penyaringan informasi karena meningkatkan kualitas hasil pencarian dan menyediakan elemen yang lebih relevan dengan item pencarian atau yang terkait dengan riwayat pencarian pengguna.
+A recommendation system is a type of information filtering system as it improves the quality of search results and provides elements that are more relevant to the search items or those related to the user's search history.
 
-Ini adalah sistem penyaringan informasi aktif yang mempersonalisasi informasi yang diberikan kepada pengguna berdasarkan minat mereka, relevansi informasi, dll. Sistem rekomendasi banyak digunakan untuk merekomendasikan film, item, restoran, tempat untuk dikunjungi, item untuk dibeli, dll. Dengan menggunakan metode conten based filtering yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
+This is an active information filtering system that personalizes information given to users based on their interests, information relevance, etc. Recommendation systems are widely used to recommend movies, items, restaurants, places to visit, items to buy, etc. Using content-based filtering methods that use item features to recommend other items similar to what users like, based on their previous actions or explicit feedback.
 
 ## Business Understanding
 ### Problem Statements
-Dari uraian latar belakang yang telah dijabarkan diatas, dapat dirumuskan masalah sebagai berikut:
-- Bagaimana cara kerja sistem rekomendasi restauran? 
-- Metode apa yang digunakan?
+From the background description outlined above, the following problems can be formulated:
+- How does the restaurant recommendation system work?
+- What method is used?
 
 ### Goals
 
-Tujuan:
-- Memberikan rekomendasi yang menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
-- Metode yang digunakan adalah konten user based filtering yang gmenggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit. 
+Objectives:
+- Provide recommendations that use item features to recommend other items similar to what users like, based on their previous actions or explicit feedback.
+- The method used is content user-based filtering which uses item features to recommend other items similar to what users like, based on their previous actions or explicit feedback.
 
 ### Solution statements
-- Meneliti dataset seperti menghilangkan kolom yang tidak perlu kita gunakan dan kita menghapusnya. Kemudian menghilangkan item yang memiliki nama serupa.
+- Examine the dataset such as removing columns we don't need to use and delete them. Then eliminate items that have similar names.
 
 ## Data Understanding
-Dataset yang digunakan pada proyek kali ini adalah Zomato Bangalore Dataset dari [Kaggle](https://www.kaggle.com/datasets/absin7/zomato-bangalore-dataset) yang memiliki ukuran 89 mb dan memiliki 17 kolom dan 51716 baris.
-Berikut informasi mengenai variabel dari dataset:  
-- url : Merupakan alamat restoran dari website zomato.
-- address : Merupakan alamat pada restoran.
-- name : Nama dari restoran
-- online_order : Keterangan restoran bisa dipesan melalui online atau tidak
-- book_table : Keterangan apakah restoran bisa memesan meja atau tidak
-- rate : Nilai dari restoran yang diberi oleh pelanggan
-- votes : Jumlah pelanggan yang memilih restoran
-- phone : Nomor telepon restoran
-- location : lokasi pada Bangalore
-- rest_type : Tipe dari restoran
-- dish_liked : Sajian yang disukai
-- cuisines : Jenis masakan yang dibuat
-- approx_cost(for two people) : Perkiraan biaya untuk 2 orang
-- reviews_list : Daftar ulasan
-- menu item : Menu Item
-- listed_in(type) : Jenis sajian restoran seperti ambil sendiri atau dilayani
-- listed_in(city) : Lokasi cabang restoran yang ada
-
+The dataset used in this project is the Zomato Bangalore Dataset from [Kaggle](https://www.kaggle.com/datasets/absin7/zomato-bangalore-dataset) which has a size of 89 mb and has 17 columns and 51716 rows.
+Here is information about the variables from the dataset:
+- url: Restaurant address from zomato website.
+- address: Restaurant address.
+- name: Name of the restaurant
+- online_order: Information whether restaurant can be ordered online or not
+- book_table: Information whether restaurant can book tables or not
+- rate: Value of restaurant given by customers
+- votes: Number of customers who voted for the restaurant
+- phone: Restaurant phone number
+- location: location in Bangalore
+- rest_type: Type of restaurant
+- dish_liked: Preferred dishes
+- cuisines: Types of cuisine made
+- approx_cost(for two people): Estimated cost for 2 people
+- reviews_list: List of reviews
+- menu item: Menu Items
+- listed_in(type): Type of restaurant service such as self-service or served
+- listed_in(city): Location of existing restaurant branches
 
 ## Exploratory Data Analysis
-Drop kolom yang tidak digunakan pada dataset ini yaitu 'url', 'dish_liked', 'phone', 'address','rest_type', 'type', 'menu_item', 'votes'. Kolom yang tersisa setelah didrop sejumlah 10 kolom dan 23043 baris. Kemudian kolom yang digunakan hanya 'cuisines',	'Nilai Rating' yang diubah dari kolom 'rates' dan 'cost'. Sedangkan baris yang digunakan hanya 23043 dari 51716.
+Drop columns that are not used in this dataset, namely 'url', 'dish_liked', 'phone', 'address', 'rest_type', 'type', 'menu_item', 'votes'. The remaining columns after being dropped are 10 columns and 23043 rows. Then the columns used are only 'cuisines', 'Rating Value' which is changed from the 'rates' column and 'cost'. While the rows used are only 23043 out of 51716.
 
-Kemudian menangani Nilai yang hilang pada dataset dengan menghapusnya menggunakan drop hingga tak tersisa. 
-- Visualisasi dari lokasi restoran terlaris.
-Restoran yang memiliki rating tinggi diberi penilaian oleh pengguna yang sudah mengunjunginya.
+Then handle missing values in the dataset by deleting them using drop until none are left.
+- Visualization of the most popular restaurant locations.
+Restaurants with high ratings are rated by users who have visited them.
 
 ![lok](https://user-images.githubusercontent.com/76243151/195944993-893ab362-280b-4de9-9906-ed695003dcc0.png)
 
-Gambar.1 Visualisasi lokasi 
+Figure 1. Location Visualization
 
-Pada gambar .1 kita bisa lihat bahwa Koramangala 5th Black adalah lokasi restoran terlaris dan terpadat
+In Figure 1, we can see that Koramangala 5th Block is the most popular and crowded restaurant location.
 
 ## Data Preparation
-### Menghapus Kolom
-Pada tahap ini saya melakukan penghapusan pada kolom yang tidak kita gunakan seperti yang saya lakukan pada dataset yaitu 'url', 'dish_liked', 'phone', 'address','rest_type', 'type', 'menu_item' dan'votes'. Dengan mengdrop kolom yang kita rasa tidak perlu.
-### Menghitung Rata - Rata Rating
-Menghitung rata-rata rating menggunakan _mean_ dan menormalisasi data menggunakan MinMaxScaler
-### Sampel
-Pada sampel data yang kita gunakan adalah 50% dari data menggunakan frac(0.5) yang artinya menggunakan setengah dari total data.
-### Penanganan Nilai Hilang
-Pada tahap ini saya memiliki nilai 37700 yang hilang, namun dengan mengdrop data yang hilang tersebut maka saya bisa melanjutkan modelling tanpa masalah. 
-Metode yang saya gunakan adalah dengan menghapus data yang hilang menggunakan drop, 
+### Deleting Columns
+At this stage, I deleted columns that we do not use as I did in the dataset, namely 'url', 'dish_liked', 'phone', 'address', 'rest_type', 'type', 'menu_item', and 'votes'. By dropping columns that we feel are unnecessary.
+### Calculating Average Rating
+Calculate the average rating using _mean_ and normalize the data using MinMaxScaler.
+### Sample
+In the sample data we use, it is 50% of the data using frac(0.5) which means using half of the total data.
+### Handling Missing Values
+At this stage, I have 37700 missing values, but by dropping the missing data, I can continue modeling without problems.
+The method I use is to delete missing data using drop,
 
 df.isnull().sum()
-df.dropna(how='any',inplace=True)
+df.dropna(how='any', inplace=True)
 
 ## Modeling
 
 ### Content Based Filtering
-Content based filtering menggunakan fitur item untuk merekomendasikan item lain yang serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
+Content-based filtering uses item features to recommend other items similar to what users like, based on their previous actions or explicit feedback.
 ### TF-IDF
-Membuat tf-idf matrix. Disitu saya menggunakan Cosine Similarity untuk mendeteksi kata plagiarisme dari 'reviews_list'.
+Create a tf-idf matrix. There I use Cosine Similarity to detect plagiarism words from 'reviews_list'.
 
-Membuat daftar untuk menempatkan restoran teratas kemudian mencari indeks restoran yang dimasukkan. Mencari restoran dengan nilai cosinus yang sama dari nomor besar. Mengekstrak 40 indeks restoran teratas dengan nilai cosinus yang serupa. Dilanjut membuat kumpulan data baru untuk menampilkan restoran serupa dan buat 40 restoran serupa teratas dengan beberapa kolomnya. Setelah itu _drop_ restoran yang bernama sama dan urutkan hanya 10 teratas berdasarkan peringkat tertinggi
+Create a list to place the top restaurants and then find the index of the entered restaurant. Find restaurants with the same cosine value from the large number. Extract the top 40 restaurant indices with similar cosine values. Then create a new dataset to display similar restaurants and create the top 40 similar restaurants with some of their columns. After that, drop restaurants with the same name and sort only the top 10 based on the highest ranking.
 
-Pada tahap ini saya membuat variabel baru untuk mengerucutkan apa saja yang saya akan tampilkan, seperti 'cuisines', 'Nilai Rating', dan 'cost'. Dari situ kita bisa menggunakan kata kunci nama restoan yang berasal untuk mencari rekomendasi restoran 40 teratas yang memiliki nilai relevan seperti rating dan biaya yang diberikan oleh pengguna. Dan disitu saya mengerucutkannya lagi yang hanya menampilkan 10 restoran teratas dengan kategori 'Nilai Rating' dan 'cost' atau biaya.
-- Kelebihannya tidak memerlukan proses pembentukan neighborhood.
-- Kelemahan dari user based filtering adalah ketika pengujian dilakukan dengan pengukuran error menggunakan normalized mean absolute error (NMAE), hasil yang diperoleh NMAE cukup tinggi.
+At this stage, I create a new variable to narrow down what I will display, such as 'cuisines', 'Rating Value', and 'cost'. From there, we can use the restaurant name keyword to find the top 40 restaurant recommendations that have relevant values such as ratings and costs given by users. And there I narrow it down again to only display the top 10 restaurants with the 'Rating Value' and 'cost' or cost categories.
+- The advantage is that it does not require the process of forming a neighborhood.
+- The disadvantage of user-based filtering is that when testing is done with error measurement using normalized mean absolute error (NMAE), the result obtained is quite high NMAE.
 
-### Hasil Modelling
-Hasil dari rekomendasi beberapa restoran yang serupa dengan nama restoran 'Jalsa' :
+### Modeling Results
+The results of recommendations for several restaurants similar to the restaurant 'Jalsa':
 
-Pada Tabel.1 merekomendasikan restoran yang memiliki kemiripan seperti restoran Jalsa
+In Table 1, it recommends restaurants that have similarities like the restaurant Jalsa.
 
-|index|cuisines|Nilai Rating|cost|
+|index|cuisines|Rating Value|cost|
 |---|---|---|---|
-|The Black Pearl|North Indian, European, Mediterranean|4\.78|1\.4|
-|Communiti|Continental, BBQ, Salad|4\.67|1\.5|
-|Hammered|North Indian, Thai, Japanese, Continental, Cafe|4\.65|1\.3|
-|The Pallet|Continental, Mediterranean, Italian, North Indian, Finger Food, Asian, Momos|4\.48|1\.6|
-|The Globe Grub|Continental, North Indian, Asian, Italian|4\.48|1\.3|
-|Jalsa Gold|North Indian, Mughlai, Italian|4\.48|1\.3|
-|Brooks And Bonds Brewery|Continental, Mediterranean, North Indian, Chinese, Finger Food|4\.45|1\.6|
-|Delhi Highway|North Indian|4\.41|1\.2|
-|Deja Vu Resto Bar|North Indian, Italian|4\.35|900\.0|
-|The Fisherman'S Wharf|Seafood, Goan, North Indian, Continental, Asian|4\.3|1\.4|
+|The Black Pearl|North Indian, European, Mediterranean|4.78|1.4|
+|Communiti|Continental, BBQ, Salad|4.67|1.5|
+|Hammered|North Indian, Thai, Japanese, Continental, Cafe|4.65|1.3|
+|The Pallet|Continental, Mediterranean, Italian, North Indian, Finger Food, Asian, Momos|4.48|1.6|
+|The Globe Grub|Continental, North Indian, Asian, Italian|4.48|1.3|
+|Jalsa Gold|North Indian, Mughlai, Italian|4.48|1.3|
+|Brooks And Bonds Brewery|Continental, Mediterranean, North Indian, Chinese, Finger Food|4.45|1.6|
+|Delhi Highway|North Indian|4.41|1.2|
+|Deja Vu Resto Bar|North Indian, Italian|4.35|900.0|
+|The Fisherman'S Wharf|Seafood, Goan, North Indian, Continental, Asian|4.3|1.4|
 
-Tabel.1 Hasil Rekomendasi dari "Jalsa"
-
-
+Table 1. Recommendation Results from "Jalsa"
 
 ## Evaluation
-Saya mengambil sampel satu lagi untuk memastikan bahwa sistem rekomendasinya berjalan dengan baik yaitu Grand Village.
+I took another sample to ensure that the recommendation system works well, namely Grand Village.
 
-Berikut hasil dari Restoran Grand Village:
+Here are the results from the Grand Village Restaurant:
 
-Pada Tabel.2 terlihat bahwa rekomendasi dari restoran yang serupa dengan Grand Villge
+In Table 2, it can be seen that the recommendations from restaurants similar to Grand Village.
 
-|index|cuisines|Nilai Rating|cost|
+|index|cuisines|Rating Value|cost|
 |---|---|---|---|
-|Village - The Soul Of India|North Indian, Lucknowi, Gujarati, Maharashtrian, South Indian, Bengali|3\.85|1\.1|
-|Shanthi Sagar|South Indian, North Indian, Chinese|3\.72|400\.0|
-|Shanthi Sagar|South Indian, North Indian, Chinese, Juices|3\.72|250\.0|
-|Cinnamon|North Indian, Chinese, Biryani|3\.71|550\.0|
-|Madeena Hotel|North Indian, Mughlai, Biryani|3\.71|400\.0|
-|Red Chilliez|North Indian, South Indian, Chinese, Seafood|3\.26|550\.0|
-|Red Chilliez|North Indian, Chinese, Seafood, Mangalorean|3\.26|650\.0|
-|Konaseema Grand|North Indian, Mughlai, Andhra, Biryani|2\.87|1\.0|
-|Melange - Hotel Ekaa|North Indian, Chinese, Continental, Mangalorean|2\.81|900\.0|
-|Kabab Treat|North Indian, Chinese|2\.29|500\.0|
+|Village - The Soul Of India|North Indian, Lucknowi, Gujarati, Maharashtrian, South Indian, Bengali|3.85|1.1|
+|Shanthi Sagar|South Indian, North Indian, Chinese|3.72|400.0|
+|Shanthi Sagar|South Indian, North Indian, Chinese, Juices|3.72|250.0|
+|Cinnamon|North Indian, Chinese, Biryani|3.71|550.0|
+|Madeena Hotel|North Indian, Mughlai, Biryani|3.71|400.0|
+|Red Chilliez|North Indian, South Indian, Chinese, Seafood|3.26|550.0|
+|Red Chilliez|North Indian, Chinese, Seafood, Mangalorean|3.26|650.0|
+|Konaseema Grand|North Indian, Mughlai, Andhra, Biryani|2.87|1.0|
+|Melange - Hotel Ekaa|North Indian, Chinese, Continental, Mangalorean|2.81|900.0|
+|Kabab Treat|North Indian, Chinese|2.29|500.0|
 
-Tabel.2 Hasil Rekomendasi dari "Grand Village"
+Table 2. Recommendation Results from "Grand Village"
 
+The formula for Content-Based Filtering:
 
+P = (# of our recommendations that are relevant) / (# of items we recommended)
 
-Rumus untuk Content-Based Filtering : 
+For p = 1, because relevant recommendations divided by the items we recommended
+which for relevant recommendations = 10, recommended items = 10.
 
-P =(  # of our recommendations that are relevant) / (# of items we recommended)
+So, 10/10 = 1
 
-Untuk p = 1, karena rekomendasi yang relevan dibagi dengan item yang kita rekomendasikan
-yang mana untuk rekomendasi relevan = 10, item yang direkomendasi = 10.
+With the formula above, we can recommend very well.
 
-Maka, 10/10 = 1
-
-Dengan rumus diatas, kita bisa merekomendasikan dengan sangat baik.
-
-Referensi:
+References:
 - Google Developers, https://developers.google.com/machine-learning/recommendation/content-based/basics#:~:text=Content%2Dbased%20filtering%20uses%20item,previous%20actions%20or%20explicit%20feedback.
-- Sistem rekomendasi-Content Based, Binus University (17 Nov 2020) https://mti.binus.ac.id/2020/11/17/sistem-rekomendasi-content-based/
+- Recommendation System-Content Based, Binus University (17 Nov 2020) https://mti.binus.ac.id/2020/11/17/sistem-rekomendasi-content-based/
